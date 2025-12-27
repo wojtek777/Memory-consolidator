@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <button onclick="login()">Login</button>
+
+  <script>
+    function login() {
+      // Fake login for now
+      localStorage.setItem("token", "fake-jwt");
+      window.location.href = "/chat";
+    }
+  </script>
+</body>
+</html>
+
