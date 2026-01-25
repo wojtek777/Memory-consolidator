@@ -1,28 +1,39 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-import uuid
+from typing import List, Optional
 
 router = APIRouter(prefix="/api")
 
-SESSIONS = {}
+# --- Models ---
+class Message(BaseModel):
+    role: str
+    content: str
 
 class ChatRequest(BaseModel):
-    session_id: str
-    message: str
+    messages: List[Message]  # Full conversation from client
 
-@router.post("/session")
-def create_session():
-    session_id = str(uuid.uuid4())
-    SESSIONS[session_id] = []
-    return {"session_id": session_id}
-
+# --- Chat endpoint ---
 @router.post("/chat")
 def chat(req: ChatRequest):
-    SESSIONS[req.session_id].append(("user", req.message))
+    """
+    Receives full conversation from client.
+    Decides if a tool should be called or just respond via AI.
+    """
+    messages = req.messages
+    last_msg = messages[-1].content if messages else ""
 
-    # AI stub (replace later with real Logical Processor)
-    reply = f"AI says: I received '{req.message}'"
+    tool_invoked = None
+    if "sleep" in last_msg.lower():
+        tool_invoked = "sleep"
+        ai_reply = "AI going to sleep..."
+    elif "remember" in last_msg.lower():
+        tool_invoked = "memory_retrieve"
+        ai_reply = "AI retrieving memory..."
+    else:
+        ai_reply = f"AI says: I received '{last_msg}'"
 
-    SESSIONS[req.session_id].append(("assistant", reply))
-    return {"reply": reply}
+    return {
+        "reply": ai_reply,
+        "tool": tool_invoked
+    }
 

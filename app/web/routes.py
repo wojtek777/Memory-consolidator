@@ -1,10 +1,14 @@
-from fastapi import APIRouter
-from fastapi.responses import HTMLResponse
 from pathlib import Path
+from fastapi import APIRouter
+from fastapi.responses import HTMLResponse,RedirectResponse
 
 router = APIRouter()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parents[1]
+
+@router.get("/")
+def root():
+    return RedirectResponse(url="/login", status_code=302)
 
 @router.get("/login", response_class=HTMLResponse)
 def login_page():

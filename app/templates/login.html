@@ -1,11 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card {
+      background: white;
+      padding: 40px;
+      width: 320px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .login-card h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .login-card p {
+      margin-bottom: 30px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #667eea;
+      color: white;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .login-button:hover {
+      background: #5a67d8;
+    }
+
+    .login-button:active {
+      transform: scale(0.98);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-  <h2>Login</h2>
-  <button onclick="login()">Login</button>
+
+  <div class="login-card">
+    <h2>Welcome back</h2>
+    <p>Sign in to continue to your AI chat</p>
+
+    <button class="login-button" onclick="login()">
+      Login
+    </button>
+
+    <div class="footer">
+      Prototype login (no password required)
+    </div>
+  </div>
 
   <script>
     function login() {
@@ -14,6 +84,7 @@
       window.location.href = "/chat";
     }
   </script>
+
 </body>
 </html>
 

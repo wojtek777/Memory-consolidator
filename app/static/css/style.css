@@ -1,12 +1,230 @@
-body {
-  font-family: Arial, sans-serif;
+/* ---------- Base ---------- */
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --primary: #4a6cf7;
+  --text: #333;
+  --assistant: #e4e7ef;
 }
 
-#chat-box {
-  border: 1px solid #ccc;
-  height: 300px;
+body.dark {
+  --bg: #1e1e2f;
+  --card: #2c2c44;
+  --primary: #7b9cff;
+  --text: #f1f1f1;
+  --assistant: #3a3a5c;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------- Container ---------- */
+.chat-container {
+  width: 400px;
+  max-width: 95%;
+  height: 600px;
+  background: var(--card);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+
+/* ---------- Header ---------- */
+.chat-header {
+  background: var(--primary);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between; /* keeps theme button on right */
+  align-items: center;
+}
+
+/* Chat header h2 styling */
+.chat-header h2 {
+  color: #28a745;       /* Green text */
+  text-align: center;    /* Center the text */
+  margin: 0;             /* Remove default h2 margin */
+  flex: 1;               /* Take available space to center correctly */
+  font-weight: bold;
+}
+
+
+#theme-toggle {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+}
+
+/* ---------- Chat ---------- */
+.chat-box {
+  flex: 1;
+  padding: 15px;
   overflow-y: auto;
-  margin-bottom: 10px;
-  padding: 5px;
+}
+
+/* ---------- Messages ---------- */
+.message {
+  max-width: 75%;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: 16px;
+  font-size: 14px;
+  animation: fadeIn 0.2s ease-in;
+  color: #111111;
+}
+
+.message.user {
+  background: var(--primary);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.message.assistant {
+  background: var(--assistant);
+  color: var(--text);
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+/* Message bubbles colors per role */
+.message.user {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.message.assistant {
+  background-color: #e2e3e5;
+  color: #41464b;
+}
+
+/* Dark theme overrides */
+body.dark .message.user {
+  background-color: #3a3f45;
+  color: #f1f1f1;
+}
+
+body.dark .message.assistant {
+  background-color: #2f6fed;
+  color: #ffffff;
+}
+
+
+/* ---------- Timestamp ---------- */
+.timestamp {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* ---------- Typing ---------- */
+.typing {
+  padding: 8px 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.typing span {
+  animation: blink 1.4s infinite both;
+}
+
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+.hidden {
+  display: none;
+}
+
+/* ---------- Input ---------- */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+/* =========================
+   DARK THEME FIX (MESSAGES)
+   ========================= */
+
+body.dark .message.user {
+  background-color: #3a3f45;
+  color: #f1f1f1; /* FIX: readable text */
+}
+
+body.dark .message.assistant {
+  background-color: #2f6fed;
+  color: #ffffff; /* FIX: readable text */
+}
+
+body.dark .message.system {
+  background-color: #555;
+  color: #ffffff;
+  font-style: italic;
+}
+
+body.dark .timestamp {
+  color: #bbbbbb;
+}
+
+body.dark .chat-input input {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+body.dark button {
+  background-color: #444;
+  color: #f1f1f1;
+}
+
+body.dark button:hover {
+  background-color: #555;
+}
+
+/* === FORCE DARK MODE MESSAGE TEXT COLOR === */
+
+body.dark .chat-box .message,
+body.dark .chat-box .message * {
+  color: #f1f1f1 !important;
 }
 
