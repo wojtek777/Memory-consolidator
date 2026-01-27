@@ -1,3 +1,7 @@
+from sqlalchemy import Column, Integer, Text
+from app.db import Base
+from app.db.timepoint import TimePointMixin
+
 class Memory(Base):
     __tablename__ = "memories"
 
