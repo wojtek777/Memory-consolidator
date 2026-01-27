@@ -7,6 +7,7 @@ const typing = document.getElementById("typing-indicator");
 const toggle = document.getElementById("theme-toggle");
 const endButton = document.getElementById("end-chat");
 
+///// CLIENT SESSION STATE
 // Load persisted state
 let messages = JSON.parse(localStorage.getItem(STORAGE_MESSAGES)) || [];
 let theme = localStorage.getItem(STORAGE_THEME) || "light";

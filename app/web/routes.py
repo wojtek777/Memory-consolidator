@@ -18,3 +18,7 @@ def login_page():
 def chat_page():
     return (BASE_DIR / "templates/chat.html").read_text()
 
+@router.get("/register", response_class=HTMLResponse)
+def register_page():
+    return (BASE_DIR / "templates/register.html").read_text()
+

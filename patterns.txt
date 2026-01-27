@@ -1,0 +1,20 @@
+1. Mapper - maps objects in memory to database record and vice versa.
+    *Implemented through SQLAlchemy's ORM Data Mapper (User and Memory chunks).
+    *Allows natural object manipulation in Python, allow for persistent separation between memory objects and database objects
+    *Where: app/auth/models.py, app/auth/services.py
+
+2. Service Layer - encapsulates all logic related to authentication as AuthService.
+    *Implemented is spearate file, as AuthService file, used by routes.py
+    *Where: app/auth/services.py
+
+3. Client Session State - current messages and settings are stored on the client browser side
+    *Where: app/static/js/chat.js
+
+4. Gateway - encapsulates acces to external system/resource (OpenAI)
+    *No business logic, shields from retries, auth, protocols
+    *Where: app/ai/client.py
+
+5. Domain Model - represents actual memories and linkage between other memories and user and its knowledge
+    *Where: app/authmodels.py, app/chat/models.py
+
+6. 

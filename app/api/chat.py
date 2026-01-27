@@ -2,6 +2,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List, Optional
 
+from app.chat.services import ChatService
+
 router = APIRouter(prefix="/api")
 
 # --- Models ---
@@ -10,30 +12,30 @@ class Message(BaseModel):
     content: str
 
 class ChatRequest(BaseModel):
-    messages: List[Message]  # Full conversation from client
+    messages: List[Message]
 
 # --- Chat endpoint ---
 @router.post("/chat")
 def chat(req: ChatRequest):
     """
     Receives full conversation from client.
-    Decides if a tool should be called or just respond via AI.
+    Delegates reply generation to ChatService.
     """
-    messages = req.messages
-    last_msg = messages[-1].content if messages else ""
+    service = ChatService()
 
+    messages = [m.dict() for m in req.messages]
+
+    last_msg = messages[-1]["content"] if messages else ""
     tool_invoked = None
+
     if "sleep" in last_msg.lower():
         tool_invoked = "sleep"
-        ai_reply = "AI going to sleep..."
-    elif "remember" in last_msg.lower():
-        tool_invoked = "memory_retrieve"
-        ai_reply = "AI retrieving memory..."
+        reply = "AI going to sleep..."
     else:
-        ai_reply = f"AI says: I received '{last_msg}'"
+        reply = service.reply(messages)
 
     return {
-        "reply": ai_reply,
+        "reply": reply,
         "tool": tool_invoked
     }
 
