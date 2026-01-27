@@ -17,4 +17,12 @@
 5. Domain Model - represents actual memories and linkage between other memories and user and its knowledge
     *Where: app/authmodels.py, app/chat/models.py
 
-6. 
+6. Timepoint - represents a single immutable moment something hapened in domain
+    *Where: db/timepoint.py
+
+7. Range - validating memories from specific time periodi
+    *Where:  app/memory/range.py
+
+8. Separated Presentation
+    *Where: app/static/js/chat.js handles all presentation/UI logic, theme toggle, showing typing indicators
+    *Where: app/api/chat.py + services.py handle business logic, memories condensation, does not know about DOM, CSS
