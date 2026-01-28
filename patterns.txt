@@ -15,7 +15,7 @@
     *Where: app/ai/client.py
 
 5. Domain Model - represents actual memories and linkage between other memories and user and its knowledge
-    *Where: app/authmodels.py, app/chat/models.py
+    *Where: app/auth/models.py, app/chat/models.py
 
 6. Timepoint - represents a single immutable moment something hapened in domain
     *Where: db/timepoint.py

@@ -1,0 +1,51 @@
+@startuml
+title Memory Consolidator – Architecture Overview
+
+package "Web (Presentation)" {
+  class LoginHTML
+  class ChatHTML
+  class ChatJS
+}
+
+package "API Layer" {
+  class ChatController
+  class AuthController
+  class ConsolidateController
+}
+
+package "Service Layer" {
+  class ChatService
+  class AuthService
+  class MemoryService
+}
+
+package "AI Gateway" {
+  class GPTClient
+}
+
+package "Domain Model" {
+  class User
+  class Memory
+}
+
+package "Database Infrastructure" {
+  class SessionLocal
+  class Base
+}
+
+LoginHTML --> ChatController
+ChatJS --> ChatController
+ChatJS --> ConsolidateController
+LoginHTML --> AuthController
+
+ChatController --> ChatService
+AuthController --> AuthService
+ConsolidateController --> ChatService
+ConsolidateController --> MemoryService
+
+ChatService --> GPTClient
+AuthService --> User
+MemoryService --> Memory
+
+@enduml
+
